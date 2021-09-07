@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * we implemented UserDetailsService to override loadUserByUsername
  * so , we will load the appUser account using the username ;
  */
+@Service
 public class UserServiceImp implements UserDetailsService {
 
     @Autowired

@@ -26,4 +26,9 @@ public class AppUserServiceImp implements AppUserService {
     public AppUser getAppUser(String username) {
         return appUserRepository.findAppUserByUsername(username);
     }
+
+    @Override
+    public AppUser saveAppUser(AppUser appUser) {
+        return appUserRepository.save(appUser);
+    }
 }
