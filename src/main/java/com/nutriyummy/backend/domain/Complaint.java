@@ -1,9 +1,6 @@
 package com.nutriyummy.backend.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Create complaint model table
@@ -23,6 +20,10 @@ public class Complaint {
     private String content ;
     private String status ;
 
+    //create a relation between complaint and appuser
+    @ManyToOne
+    private AppUser appUser ;
+
     public Complaint(){}
 
     public Complaint(String content){
@@ -41,11 +42,19 @@ public class Complaint {
         return status;
     }
 
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
     public void setContent(String content) {
         this.content = content;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

@@ -3,11 +3,9 @@ package com.nutriyummy.backend.domain;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Create application user model table
@@ -28,6 +26,11 @@ public class AppUser implements UserDetails {
     private String lastName ;
     private String username ;
     private String password ;
+
+    //relation between appuser and complaint where the complaintList will be mapped by appUser in Complaint table
+    @OneToMany(mappedBy = "appUser")
+    private List<Complaint> complaintList ;
+
 
     public AppUser(){}
 
@@ -63,6 +66,9 @@ public class AppUser implements UserDetails {
         return password;
     }
 
+    public List<Complaint> getComplaintList() {
+        return complaintList;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

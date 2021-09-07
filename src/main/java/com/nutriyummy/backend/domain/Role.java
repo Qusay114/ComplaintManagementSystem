@@ -1,13 +1,10 @@
 package com.nutriyummy.backend.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Create role model table
- * to use it to give every application user a role 
+ * to use it to give every application user a role
  */
 @Entity
 public class Role {
@@ -17,6 +14,7 @@ public class Role {
     private Long id ;
 
     private String name ;
+
 
     public Role(){}
 
