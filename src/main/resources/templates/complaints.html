@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>complaints</title>
+</head>
+<body>
+
+<header th:replace="fragments/headerFragment :: head"></header>
+
+<h1>Complaints Page</h1>
+
+<form  th:action="@{/complaints}"  method="post" >
+    <input type="text" name="content"  placeholder="first name" required />
+    <br>
+    <button type="submit" class="btn btn-primary">ADD New Complaint</button>
+</form>
+
+<div th:each="complaint : ${complaints}">
+    <h1>Content : </h1>
+    <div th:text="${complaint.getContent()}" ></div>
+    <h1>Status : </h1>
+    <div th:text="${complaint.getStatus()}" ></div>
+</div>
+
+</body>
+</html>

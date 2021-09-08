@@ -17,12 +17,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	//bootstrap
+	implementation group: 'org.webjars', name: 'bootstrap', version: '5.0.2'
+
+	//thymeleaf security
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:3.0.4.RELEASE'
+	implementation 'org.springframework.security:spring-security-taglibs:5.5.1'
 }
 
 test {

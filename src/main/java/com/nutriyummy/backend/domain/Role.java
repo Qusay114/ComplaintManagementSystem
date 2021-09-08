@@ -1,6 +1,8 @@
 package com.nutriyummy.backend.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Create role model table
@@ -14,6 +16,9 @@ public class Role {
     private Long id ;
 
     private String name ;
+
+   @ManyToMany(mappedBy = "roles")
+   private Set<AppUser> appUsers = new HashSet<>();
 
 
     public Role(){}
@@ -30,7 +35,13 @@ public class Role {
         return name;
     }
 
+    public Set<AppUser> getAppUsers() {
+        return appUsers;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
+
+
 }
