@@ -3,29 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
 <header th:replace="fragments/headerFragment :: head " ></header>
 
-<h1>Sign up page</h1>
-
-    <form  th:action="@{/signup}"  method="post" >
-        <input type="text" name="firstName"  placeholder="first name" required />
+<div id="container" style="position: relative;" >
+    <form  th:action="@{/signup}"  method="post" style="width: 20rem;position: relative;left: 50% ;transform: translateX(-50%);">
+        <div class="form-group">
+        <input type="text" name="firstName"  placeholder="first name" class="form-control" required />
         <br>
-        <input type="text" name="lastName" placeholder="last name" required />
+        <input type="text" name="lastName" placeholder="last name" class="form-control" required />
         <br>
-        <input type="text" name="username" placeholder="username" required />
+        <input type="text" name="username" placeholder="username" class="form-control" required />
         <br>
-        <input type="text" name="password" placeholder="password" required />
+        <input type="text" name="password" placeholder="password" class="form-control" required />
         <br>
-        <select name="role">
+        <select name="role" onchange="showFunction()" id="roleSelection" class="form-control" >
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
         </select>
         <br>
-        <input type="password" name="confirmationCode" placeholder="confirm your role , optional" />
-        <button type="submit" class="btn btn-primary">Create User</button>
+        <input type="password" name="confirmationCode" placeholder="confirm your role , optional" id="confirmRole" style="display:none;" class="form-control"/>
+        <br>
+        <button type="submit" class="btn btn-primary" >Sign Up</button>
+        </div>
     </form>
+</div>
+
+
+
+<script>
+    function showFunction() {
+     let role = document.getElementById('roleSelection').value 
+     let confirmEl = document.getElementById('confirmRole') 
+     if(role == "ADMIN")
+        confirmEl.style.display = "block" 
+    else
+        confirmEl.style.display = "none"
+
+    }
+</script>
 
 </body>
 </html>
