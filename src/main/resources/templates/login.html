@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
 </head>
 <body>
 
-<h1>Log in page</h1>
+<header th:replace="fragments/headerFragment :: head " ></header>
+
+    <form th:action="@{/login}" method="post">
+        <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
 
 </body>
 </html>

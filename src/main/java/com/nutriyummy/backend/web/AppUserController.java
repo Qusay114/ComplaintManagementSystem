@@ -1,7 +1,9 @@
 package com.nutriyummy.backend.web;
 
 import com.nutriyummy.backend.domain.AppUser;
+import com.nutriyummy.backend.domain.Role;
 import com.nutriyummy.backend.services.AppUserService;
+import com.nutriyummy.backend.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,8 @@ public class AppUserController {
     @Autowired
     private AppUserService appUserService ;
     @Autowired
+    private RoleService roleService ;
+    @Autowired
     private BCryptPasswordEncoder encoder ;
 
     /**
@@ -35,11 +39,18 @@ public class AppUserController {
 
     @PostMapping("/signup")
     public RedirectView createNewAppUser(@RequestParam String firstName , @RequestParam String lastName,
-                                         @RequestParam String username , @RequestParam String password){
+                                         @RequestParam String username , @RequestParam String password ,
+                                         @RequestParam String role , @RequestParam String confirmationCode){
+
         AppUser appUser = new AppUser(firstName , lastName , username , encoder.encode(password));
+        if (confirmationCode.equals("12345678"))
+            appUser.addNewRole(new Role(role));
+        else
+            appUser.addNewRole(new Role("USER"));
         AppUser savedAppUser = appUserService.saveAppUser(appUser) ;
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(savedAppUser, null , new ArrayList<>());
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(savedAppUser, null , savedAppUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new RedirectView("/");
     }
@@ -52,6 +63,12 @@ public class AppUserController {
     @GetMapping("/login")
     public String getLoginPage(){
         return "login" ;
+    }
+
+
+    @GetMapping("/logout")
+    public String getLogoutPage(){
+        return "logout" ;
     }
 
 

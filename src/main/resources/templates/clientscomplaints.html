@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients Complaints</title>
+</head>
+<body>
+<header th:replace="fragments/headerFragment :: head " ></header>
+
+<h1>Client Complaints Page</h1>
+
+<div th:each="complaint : ${complaints}">
+    <h4 th:text="${complaint.getAppUser().getFirstName()}"></h4>
+    <div th:text="${complaint.getContent()}" ></div>
+        <form th:action="@{'clientscomplaints/status/'+${complaint.getId()}}" method="post">
+            <input type="radio" name="status" value="pending" checked> pending<br>
+            <input type="radio" name="status" value="resolution"> resolution<br>
+            <input type="radio" name="status" value="dismissed"> dismissed
+            <br>
+            <input type="submit" value="Change Status">
+        </form>
+
+</div>
+
+</body>
+</html>

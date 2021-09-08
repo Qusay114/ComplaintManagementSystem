@@ -35,11 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/" , "/signup" , "/login").permitAll()
+                .antMatchers("/clientscomplaints/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/")
                 .and()
-                .logout()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 ;
     }
 }

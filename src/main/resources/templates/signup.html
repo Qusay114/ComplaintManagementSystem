@@ -5,14 +5,27 @@
     <title>Sign Up</title>
 </head>
 <body>
+<header th:replace="fragments/headerFragment :: head " ></header>
+
 <h1>Sign up page</h1>
 
     <form  th:action="@{/signup}"  method="post" >
-        <input type="text" name="firstName" required />
-        <input type="text" name="lastName" required />
-        <input type="text" name="username" required />
-        <input type="text" name="password" required />
+        <input type="text" name="firstName"  placeholder="first name" required />
+        <br>
+        <input type="text" name="lastName" placeholder="last name" required />
+        <br>
+        <input type="text" name="username" placeholder="username" required />
+        <br>
+        <input type="text" name="password" placeholder="password" required />
+        <br>
+        <select name="role">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+        <br>
+        <input type="password" name="confirmationCode" placeholder="confirm your role , optional" />
         <button type="submit" class="btn btn-primary">Create User</button>
     </form>
+
 </body>
 </html>

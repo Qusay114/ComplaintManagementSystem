@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="">
 <head>
     <meta charset="UTF-8">
     <title>NUTRIYUMMY</title>
 </head>
 <body>
 
+<header th:replace="fragments/headerFragment :: head " >
+
+</header>
+
   <div>
     <h1>Welcome to NUTRIYUMMY</h1>
   </div>
+
+<sec:authorize access="hasRole('ADMIN')">
+    Manage Users
+</sec:authorize>
 
 </body>
 </html>

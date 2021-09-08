@@ -1,11 +1,11 @@
 package com.nutriyummy.backend.domain;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Create application user model table
@@ -31,6 +31,13 @@ public class AppUser implements UserDetails {
     @OneToMany(mappedBy = "appUser")
     private List<Complaint> complaintList ;
 
+
+    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "appuser_role",
+            joinColumns = @JoinColumn(name = "appuser_id") ,
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public AppUser(){}
 
@@ -70,6 +77,10 @@ public class AppUser implements UserDetails {
         return complaintList;
     }
 
+    public Set<Role> getRoleList() {
+        return roles;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -86,30 +97,39 @@ public class AppUser implements UserDetails {
         this.password = password;
     }
 
+    public void addNewRole(Role role){
+        this.roles.add(role);
+    }
+
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+        for (Role role : this.roles)
+            simpleGrantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        return simpleGrantedAuthorities ;
     }
+
+
 
 }
