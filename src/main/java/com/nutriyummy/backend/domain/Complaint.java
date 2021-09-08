@@ -17,6 +17,7 @@ public class Complaint {
     /**
      * table fields
      */
+    @Column(columnDefinition = "text")
     private String content ;
     private String status ;
 
