@@ -10,7 +10,7 @@
 <body>
 <header th:replace="fragments/headerFragment :: head " ></header>
 
-<div id="container" style="position: relative;" >
+<div id="container" style="position: relative;margin-top: 8%;" >
     <form  th:action="@{/signup}"  method="post" style="width: 20rem;position: relative;left: 50% ;transform: translateX(-50%);">
         <div class="form-group">
         <input type="text" name="firstName"  placeholder="first name" class="form-control" required />
@@ -26,9 +26,9 @@
             <option value="ADMIN">Admin</option>
         </select>
         <br>
-        <input type="password" name="confirmationCode" placeholder="confirm your role , optional" id="confirmRole" style="display:none;" class="form-control"/>
+        <input type="password" name="confirmationCode" placeholder="confirm your role" id="confirmRole" style="display:none;" class="form-control"/>
         <br>
-        <button type="submit" class="btn btn-primary" >Sign Up</button>
+        <button type="submit" class="btn btn-outline-success" >Sign Up</button>
         </div>
     </form>
 </div>

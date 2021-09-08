@@ -6,10 +6,24 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <script>
+    function showFunction() {
+     let role = document.getElementById('roleSelection').value
+     let confirmEl = document.getElementById('confirmRole')
+     if(role == "ADMIN")
+        confirmEl.style.display = "block"
+    else
+        confirmEl.style.display = "none"
+
+    }
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" th:fragment="head">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" th:fragment="head">
     <div class="container">
         <a class="navbar-brand" href="/">Codefellows Website</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -50,7 +64,166 @@
         </div>
     </div>
 
-</nav>
+</nav> -->
+
+
+
+<!--  -->
+<!--  -->
+<!--  -->
+
+<!-- Navbar -->
+<header th:fragment="head" >
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark fixed-top scrolling-navbar top-nav-collapse black navbar navbar-expand-md" >
+    <!-- Container wrapper -->
+    <div class="container" style="margin-left: 0;">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2" href="/" style="padding-top: 0; padding-bottom: 0;">
+        <img
+          th:src="@{/images/logo.png}"
+          height="70"
+          alt=""
+          loading="lazy"
+          style="margin-top: -1px;"
+        />
+      </a>
+  
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarButtonsExample" >
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 60%;">
+          <li class="nav-item" sec:authorize-url="/clientscomplaints">
+            <a class="nav-link" href="/clientscomplaints" style=" color: rgb(14 134 12 / 68%);">Dashboard</a>
+          </li>
+            <li class="nav-item" sec:authorize-url="/complaints">
+                <a class="nav-link" href="/complaints" style=" color: rgb(14 134 12 / 68%);">Dashboard</a>
+            </li>
+        </ul>
+        <!-- Left links -->
+
+        <div class="d-flex align-items-center" style="margin-left:13rem;" sec:authorize="isAuthenticated()" >
+            <form th:action="@{/logout}" method="post" th:fragment="logoutButton">
+                <button type="submit" class="btn btn-outline-danger me-3" >
+                  Log Out
+                </button>
+            </form>
+        </div>
+  
+        <div class="d-flex align-items-center" style="margin-left:13rem;" sec:authorize="isAnonymous()"  >
+          <button type="button" class="btn btn-outline-success me-3" data-toggle="modal" data-target="#loginModel">
+            Login
+          </button>
+          <button type="button" class="btn btn-outline-success me-3" style="margin-left: 2rem;"  data-toggle="modal" data-target="#signupModel">
+            Sign up 
+          </button>
+        
+        </div>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+
+<!-- <div th:replace="signupFragment :: signup"></div> -->
+<!-- The Modal -->
+<div class="modal" id="signupModel" th:fragment="signup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal1">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form  th:action="@{/signup}"  method="post" style="width: 20rem;position: relative;left: 50% ;transform: translateX(-50%);">
+                    <div class="form-group">
+                        <input type="text" name="firstName"  placeholder="first name" class="form-control" required />
+                        <br>
+                        <input type="text" name="lastName" placeholder="last name" class="form-control" required />
+                        <br>
+                        <input type="text" name="username" placeholder="username" class="form-control" required />
+                        <br>
+                        <input type="text" name="password" placeholder="password" class="form-control" required />
+                        <br>
+                        <select name="role" onchange="showFunction()" id="roleSelection" class="form-control" >
+                            <option value="USER">User</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
+                        <br>
+                        <input type="password" name="confirmationCode" placeholder="confirm your role" id="confirmRole" style="display:none;" class="form-control"/>
+                        <br>
+                        <button type="submit" class="btn btn-outline-success" >Sign Up</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div th:replace="loginFragment :: login"></div> -->
+<!-- The Modal -->
+<div class="modal" id="loginModel" th:fragment="login">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form th:action="@{/login}" method="post" style="width: 20rem;position: relative;left: 50% ;transform: translateX(-50%);">
+                    <div class="form-group">
+                        <input type="text" id="login"  name="username" placeholder="login" class="form-control" required/>
+                        <br>
+                        <input type="password" id="password"  name="password" placeholder="password" class="form-control" required/>
+                        <br>
+                        <button type="submit" class="btn btn-outline-success" >Log In</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</header>
+
+
+
 
 </body>
 </html>

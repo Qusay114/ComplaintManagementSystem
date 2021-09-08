@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
 
 <header th:replace="fragments/headerFragment :: head " ></header>
 
-    <form th:action="@{/login}" method="post">
-        <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-        <input type="submit" class="fadeIn fourth" value="Log In">
+<div id="container" style="position: relative;margin-top: 8%;" >
+    <form th:action="@{/login}" method="post" style="width: 20rem;position: relative;left: 50% ;transform: translateX(-50%);">
+        <div class="form-group">
+        <input type="text" id="login"  name="username" placeholder="login" class="form-control" required/>
+        <br>
+        <input type="password" id="password"  name="password" placeholder="password" class="form-control" required/>
+        <br>
+        <button type="submit" class="btn btn-outline-success" >Log In</button>
+        </div>
     </form>
+</div>
+
+
 
 
 </body>
