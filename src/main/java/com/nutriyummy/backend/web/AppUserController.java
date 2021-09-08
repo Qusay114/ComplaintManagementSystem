@@ -43,8 +43,10 @@ public class AppUserController {
                                          @RequestParam String role , @RequestParam String confirmationCode){
 
         AppUser appUser = new AppUser(firstName , lastName , username , encoder.encode(password));
-        if (confirmationCode.equals("12345678"))
-            appUser.addNewRole(new Role(role));
+        if (role.equals("ADMIN"))
+            if (confirmationCode.equals("12345678"))
+                appUser.addNewRole(new Role(role));
+            else return new RedirectView("/signup");
         else
             appUser.addNewRole(new Role("USER"));
         AppUser savedAppUser = appUserService.saveAppUser(appUser) ;

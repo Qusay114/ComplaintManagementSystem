@@ -11,7 +11,14 @@
 <header th:replace="fragments/headerFragment :: head " ></header>
 
 <div id="container" style="position: relative;margin-top: 8%;" >
-    <form  th:action="@{/signup}"  method="post" style="width: 20rem;position: relative;left: 50% ;transform: translateX(-50%);">
+    <form  th:action="@{/signup}"  method="post" style="    width: 29rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4rem;
+    background: #e5ece3bf;
+    border-radius: 3rem;
+">
         <div class="form-group">
         <input type="text" name="firstName"  placeholder="first name" class="form-control" required />
         <br>
@@ -33,7 +40,7 @@
     </form>
 </div>
 
-
+<footer th:replace="fragments/footerFragment :: footer"></footer>
 
 <script>
     function showFunction() {
