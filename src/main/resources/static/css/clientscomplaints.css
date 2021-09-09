@@ -1,0 +1,19 @@
+#changeStatusForm{
+  position: relative;
+  margin-left: 35%;
+  margin-top: 3rem;
+}
+
+#changeStatusForm select{
+  width: 20rem;
+}
+
+.row{
+  margin-right: 0;
+}
+
+.row .card{
+  width: 30rem;
+  margin-top:7rem;
+  margin-left: 7rem;
+}

@@ -1,0 +1,16 @@
+.row{
+  margin-right: 0;
+}
+
+.row .card{
+  width: 30rem;
+  margin-top:7rem;
+  margin-left: 7rem;
+}
+
+#addComplaintBtn{
+  position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 7rem;
+}

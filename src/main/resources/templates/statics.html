@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Statics</title>
+    <link rel="icon" th:href="@{/images/logo.png}" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+
+<header th:replace="fragments/headerFragment :: head " ></header>
+<canvas id="myChart" ></canvas>
+<footer th:replace="fragments/footerFragment :: footer"></footer>
+
+<script >
+    let pending = [[${pending}]];
+    let resolution = [[${resolution}]];
+    let dismissed = [[${dismissed}]];
+
+    var xValues = ["Resolution", "Dismissed", "Pending"];
+    var yValues = [resolution, dismissed, pending];
+    var barColors = ["red", "green","blue"];
+
+
+
+    var number = [[${pending}]];
+    var message1 = "[[${dismissed}]]";
+    console.log(number);
+    console.log(message1)
+
+
+
+
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        title: {
+          display: true,
+          text: "NUTRIYUMMY Complaints Statics"
+        }
+      }
+    });
+    </script>
+</body>
+</html>

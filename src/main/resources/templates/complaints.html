@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>complaints</title>
+    <link rel="icon" th:href="@{/images/logo.png}" >
+    <link rel="stylesheet" th:href="@{/css/complaints.css}" />
+
 </head>
 <body>
 
@@ -10,15 +13,11 @@
 
 
 
-    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#complaintModal" style="position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 7rem;
-" >
+    <button type="button" class="btn btn-outline-success" id="addComplaintBtn" data-toggle="modal" data-target="#complaintModal" >
         ADD New Complaint
     </button>
-<div class="row">
-<div th:each="complaint : ${complaints}" class="card" style="width: 30rem;margin-top:7rem;margin-left: 7rem;">
+<div class="row" >
+<div th:each="complaint : ${complaints}" class="card" >
     <div th:text="${complaint.getContent()}" class="card-body"></div>
     
     <div th:text="${complaint.getStatus()}" class="card-footer" ></div>

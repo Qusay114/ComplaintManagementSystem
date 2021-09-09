@@ -83,6 +83,16 @@ public class ComplaintController {
         return "clientscomplaints" ;
     }
 
+
+    @GetMapping("/clientscomplaints/statics")
+    public String getStaticsPage(Model model){
+        Map<String , Integer> statusNums = getComplaintsStatusNumbers(complaintService.getAllComplaints());
+        model.addAttribute("pending" , statusNums.get("pending"));
+        model.addAttribute("resolution" , statusNums.get("resolution"));
+        model.addAttribute("dismissed" , statusNums.get("dismissed"));
+        return "statics" ;
+    }
+
     private Map< String, Integer> getComplaintsStatusNumbers(List<Complaint> complaintList){
         int pendings = 0 ;
         int resolutions = 0 ;
