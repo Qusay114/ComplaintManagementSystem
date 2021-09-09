@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Clients Complaints</title>
-
+    <link rel="icon" th:href="@{/images/logo.png}" >
+    <link rel="stylesheet" th:href="@{/css/clientscomplaints.css}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 
@@ -13,10 +14,10 @@
 
 
 
-<form th:action="@{/clientscomplaints}"  method="post" style="position: relative;margin-left: 35%;margin-top: 3rem;">
+<form th:action="@{/clientscomplaints}"  method="post"  id="changeStatusForm">
     <div class="form-group">
 
-        <select class="custom-select my-1 mr-sm-2" aria-label="Default select example" name="status" style="width: 20rem;">
+        <select class="custom-select my-1 mr-sm-2" aria-label="Default select example" name="status">
 
             <option selected value="all" th:if="${selected == 'all'}">All</option>
             <option  value="all" th:unless="${selected == 'all'}">All</option>
@@ -37,8 +38,8 @@
     </div>
 </form>
 
-<div class="row">
-    <div th:each="complaint : ${complaints}" class="card" style="width: 30rem;margin-top:7rem;margin-left: 7rem;">
+<div class="row" >
+    <div th:each="complaint : ${complaints}" class="card" >
         <div th:text="${complaint.getContent()}" class="card-body"></div>
         
         <div th:text="${complaint.getStatus()}" class="card-footer" ></div>
@@ -46,13 +47,6 @@
     </div>
     </div>
 
-    <canvas id="myChart" style="width: 100%;
-    max-width: 600px;
-    display: block;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 5rem;"></canvas>
 
 
 <div class="modal" id="statusModal" >
@@ -109,44 +103,6 @@
 
 <footer th:replace="fragments/footerFragment :: footer"></footer>
 
-
-<script >
-    let pending = [[${pending}]];
-    let resolution = [[${resolution}]];
-    let dismissed = [[${dismissed}]];
-
-    var xValues = ["Resolution", "Dismissed", "Pending"];
-    var yValues = [resolution, dismissed, pending];
-    var barColors = ["red", "green","blue"];
-
-   
-
-    var number = [[${pending}]];
-    var message1 = "[[${dismissed}]]";
-    console.log(number);
-    console.log(message1)
-
-
-
-    
-    new Chart("myChart", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {display: false},
-        title: {
-          display: true,
-          text: "World Wine Production 2018"
-        }
-      }
-    });
-    </script>
 
 </body>
 </html>

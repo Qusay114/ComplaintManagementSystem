@@ -37,7 +37,7 @@
           alt=""
           loading="lazy"
           style="margin-top: -1px;"
-        />
+         src=""/>
       </a>
   
       <!-- Toggle button -->
@@ -56,13 +56,16 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarButtonsExample" >
         <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 60%;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 40%;">
           <li class="nav-item" sec:authorize-url="/clientscomplaints">
             <a class="nav-link" href="/clientscomplaints" style=" color: rgb(14 134 12 / 68%);">Dashboard</a>
           </li>
             <li class="nav-item" sec:authorize-url="/complaints">
                 <a class="nav-link" href="/complaints" style=" color: rgb(14 134 12 / 68%);">Dashboard</a>
             </li>
+                <li class="nav-item" sec:authorize-url="/clientscomplaints/statics" style="margin-left: 7rem;">
+                    <a class="nav-link" href="/clientscomplaints/statics" style=" color: rgb(14 134 12 / 68%);">Statics</a>
+                </li>
         </ul>
         <!-- Left links -->
 
