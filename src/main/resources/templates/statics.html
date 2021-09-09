@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Statics</title>
     <link rel="icon" th:href="@{/images/logo.png}" >
+    <link rel="stylesheet" th:href="@{/css/statics.css}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 <body>
@@ -20,13 +21,6 @@
     var xValues = ["Resolution", "Dismissed", "Pending"];
     var yValues = [resolution, dismissed, pending];
     var barColors = ["red", "green","blue"];
-
-
-
-    var number = [[${pending}]];
-    var message1 = "[[${dismissed}]]";
-    console.log(number);
-    console.log(message1)
 
 
 
