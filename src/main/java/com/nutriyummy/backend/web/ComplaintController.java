@@ -24,6 +24,7 @@ public class ComplaintController {
     @Autowired
     private AppUserService appUserService ;
 
+    //this will get the complaints page for the user
     @GetMapping("/complaints")
     public String getComplaintsPage(Model model , Principal principal){
         model.addAttribute("complaints" ,
@@ -32,6 +33,7 @@ public class ComplaintController {
         return "complaints";
     }
 
+    //to let the user add complaints
     @PostMapping("/complaints")
     public RedirectView addNewComplaint(@RequestParam String content , Principal principal){
         Complaint complaint = new Complaint(content) ;
@@ -41,17 +43,16 @@ public class ComplaintController {
         return new RedirectView("/complaints") ;
     }
 
+    //this will get the complaints page for the admin
     @GetMapping("/clientscomplaints")
     public String getAllComplaints(Model model){
         model.addAttribute("complaints" , complaintService.getAllComplaints());
+        //this will be for the selected status , where in this case the page will show all the complaints
         model.addAttribute("selected" , "all");
-        Map<String , Integer> statusNums = getComplaintsStatusNumbers(complaintService.getAllComplaints());
-        model.addAttribute("pending" , statusNums.get("pending"));
-        model.addAttribute("resolution" , statusNums.get("resolution"));
-        model.addAttribute("dismissed" , statusNums.get("dismissed"));
         return "clientscomplaints" ;
     }
 
+    // to let the admin change the status of the complaint
     @PostMapping("/clientscomplaints/status/{id}")
     public RedirectView changeStatus(@PathVariable Long id , @RequestParam String status){
         Complaint complaint = complaintService.getComplaint(id);
@@ -60,13 +61,12 @@ public class ComplaintController {
         return new RedirectView("/clientscomplaints");
     }
 
+    //in case the admin wants to show complaints with a specific status
     @PostMapping("/clientscomplaints")
     public String showSpecificComplaints(@RequestParam String status , Model model){
-        Map<String , Integer> statusNums = getComplaintsStatusNumbers(complaintService.getAllComplaints());
-        model.addAttribute("pending" , statusNums.get("pending"));
-        model.addAttribute("resolution" , statusNums.get("resolution"));
-        model.addAttribute("dismissed" , statusNums.get("dismissed"));
 
+        //in case selected all the complaints , so it will show all the complaints and there is no need to loop
+        //over them and check the status
         if (status.equals("all"))
         {
             model.addAttribute("complaints" , complaintService.getAllComplaints());
@@ -84,15 +84,22 @@ public class ComplaintController {
     }
 
 
+    //to get the statics chart of the complaints
     @GetMapping("/clientscomplaints/statics")
     public String getStaticsPage(Model model){
         Map<String , Integer> statusNums = getComplaintsStatusNumbers(complaintService.getAllComplaints());
+        //pass the statics , to use them to show the chart statics
         model.addAttribute("pending" , statusNums.get("pending"));
         model.addAttribute("resolution" , statusNums.get("resolution"));
         model.addAttribute("dismissed" , statusNums.get("dismissed"));
         return "statics" ;
     }
 
+    /**
+     * this function will return the number for each complaint status
+     * @param complaintList
+     * @return hashmap , that has the status as a key  , and the number of the this complaint as a vaue
+     */
     private Map< String, Integer> getComplaintsStatusNumbers(List<Complaint> complaintList){
         int pendings = 0 ;
         int resolutions = 0 ;

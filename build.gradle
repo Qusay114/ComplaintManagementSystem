@@ -25,14 +25,20 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
 	testImplementation 'org.springframework.security:spring-security-test:5.5.1'
 
+	//for h2 database
+	implementation 'com.h2database:h2'
+
 	//bootstrap
 	implementation group: 'org.webjars', name: 'bootstrap', version: '5.0.2'
 
 	//thymeleaf security
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:3.0.4.RELEASE'
 	implementation 'org.springframework.security:spring-security-taglibs:5.5.1'
+
 }
 
 test {
 	useJUnitPlatform()
 }
+
+

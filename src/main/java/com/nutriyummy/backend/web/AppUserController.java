@@ -52,6 +52,7 @@ public class AppUserController {
         AppUser savedAppUser = appUserService.saveAppUser(appUser) ;
 
 
+        //set the login token session
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedAppUser, null , savedAppUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new RedirectView("/");
