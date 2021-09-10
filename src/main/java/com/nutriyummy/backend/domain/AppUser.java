@@ -32,6 +32,8 @@ public class AppUser implements UserDetails {
     private List<Complaint> complaintList ;
 
 
+    //relation between appuser and roles where evey appuser should have a role or more , this relation will extract a table that has two colemnus
+    //for the role id and the appuser id
     @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinTable(
             name = "appuser_role",
@@ -122,6 +124,7 @@ public class AppUser implements UserDetails {
         return true;
     }
 
+    //add the roles to the authority , so I can specify the authority for each role
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
